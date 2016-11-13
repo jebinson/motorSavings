@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+</head>
+<body ng-app="app" ng-controller="appCtrl">
+
+	<div class="container">
+		<div>
+			<h2>Motor Cost Savings Calculator</h2>
+			<p>If you are considering a motor upgrade, this simple calculator can help you determine your potential cost savings. Motors are one of the few devices whose first year operating costs can be higher than their initial purchase price. This maximizes the importance of motor operating efficiency—even a slight improvement can pay for itself by returning dollars to the bottom line—quickly and in the years to follow.</p>
+
+			<p>You can calculate operating cost, or run a quick comparison between two motors.</p>
+
+			<p>To begin enter your motor information in the Detailed Cost Comparison Calculator fields and click the Calculate button.</p>
+
+			<p>The Annual Cost Savings will displayed.</p>
+		</div>
+
+		<tr ng-repeat="kws in motorDetails.kW">
+			<td>{{kws}}</td>
+		</tr>
+		
+	</div>
+	<script src="scripts/libs/angular.js"></script>
+	<script src="scripts/libs/angular-route.min.js"></script>
+	<script src="scripts/app.js"></script>
+
+</body>
+</html>
