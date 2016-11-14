@@ -1,19 +1,12 @@
-var app = angular.module('app', [])
+var app = angular.module('app', ["kendo.directives"])
 
 .constant('motorMaster', {
-	rating:[{"kW":"0.12"},{"kW":"0.18"},{"kW":"0.2"},{"kW":"0.25"},{"kW":"0.37"},
-	{"kW":"0.4"},{"kW":"0.55"},{"kW":"0.75"},{"kW":"1.1"},{"kW":"1.5"},
-	{"kW":"2.2"},{"kW":"3"},{"kW":"4"},{"kW":"5.5"},{"kW":"7.5"},{"kW":"11"},
-	{"kW":"15"},{"kW":"18.5"},{"kW":"22"},{"kW":"30"},{"kW":"37"},{"kW":"45"},
-	{"kW":"55"},{"kW":"75"},{"kW":"90"},{"kW":"110"},{"kW":"132"},{"kW":"160"},
-	{"kW":"200"},{"kW":"250"},{"kW":"315"},{"kW":"355"},{"kW":"400"},{"kW":"450"},
-	{"kW":"500-1000"}],
-	pole:[{"poles":"2_pole"},{"poles":"4_pole"},{"poles":"6_pole"},
-	{"poles":"8_pole"}],
-	ieRating:[{"IE":"IE1","desc":"Standard efficiency"},
-	{"IE":"IE2","desc":"High efficiency"},
-	{"IE":"IE3","desc":"Premium efficiency"},
-	{"IE":"IE4","desc":"Super-Premium efficiency"}]
+	rating:["0.12","0.18","0.2","0.25","0.37","0.4","0.55","0.75",
+	"1.1","1.5","2.2","3","4","5.5","7.5","11","15","18.5","22","30",
+	"37","45","55","75","90","110","132","160","200","250","315","355",
+	"400","450","500"],
+	pole:["2 pole","4 pole","6 pole","8 pole"],
+	ieRating:["IE1","IE2","IE3","IE4"]
 })
 
 .service('appService', ['$http', '$q', function($http, $q)
@@ -37,9 +30,8 @@ var app = angular.module('app', [])
 		$scope.motorDetails = data.data;
 	});
 
-
-	$scope.motorMaster = motorMaster;
-	console.log($scope.motorMaster);
-	
-
+	$scope.kwArray = motorMaster.rating;
+	$scope.poles = motorMaster.pole;
+	$scope.ieRatings = motorMaster.ieRating
 }])
+

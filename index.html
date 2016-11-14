@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/kendoStyles/kendo.common-material.min.css" />
+	<link rel="stylesheet" href="css/kendoStyles/kendo.material.min.css" />
+	<link rel="stylesheet" href="css/kendoStyles/kendo.material.mobile.min.css" />
+
 </head>
 <body ng-app="app" ng-controller="appCtrl">
 
@@ -17,21 +22,25 @@
 
 			<p>The Annual Cost Savings will displayed.</p>
 		</div>
+	<div id="example">
+    <div class="demo-section k-content">
+        <h4>Select rating /e.g. 5.5/</h4>
+        <input kendo-auto-complete ng-model="kwrating" k-data-source="kwArray" style="width: 100%;" />
+        <p class="demo-hint">Your selection: {{ kwrating }}</p>
+    </div>
 
-		<div ng-repeat="IEs in motorMaster.ieRating">
-			<h2>{{IEs.IE}} - {{IEs.desc}}</h2>
-			<div ng-repeat="kWs in motorMaster.rating">
-				<h3>{{kWs.kW}}</h3>
-				<div ng-repeat="pol in motorMaster.pole">
-					<h4>{{pol.poles}}</h4>
-					<p>{{motorDetails["IE1"]["0.12"]["2_pole"]}}</p>
-				</div>
-			</div>
-		</div>
-		
+    <div class="demo-section k-content">
+        <h4>Select number of poles /e.g. 2 pole/</h4>
+        <input kendo-auto-complete ng-model="poleSel" k-data-source="poles" style="width: 100%;" />
+        <p class="demo-hint">Your selection: {{ poleSel }}</p>
+    </div>
+
 	</div>
+	</div>
+	<script src="scripts/libs/jquery.min.js"></script>
 	<script src="scripts/libs/angular.js"></script>
-	<script src="scripts/libs/angular-route.min.js"></script>
+	<script src="scripts/libs/angular-route.min.js"></script>	
+	<script src="scripts/libs/kendoJs/kendo.all.min.js"></script>
 	<script src="scripts/app.js"></script>
 
 </body>
