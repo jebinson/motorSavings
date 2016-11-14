@@ -18,9 +18,16 @@
 			<p>The Annual Cost Savings will displayed.</p>
 		</div>
 
-		<tr ng-repeat="kws in motorDetails.kW">
-			<td>{{kws}}</td>
-		</tr>
+		<div ng-repeat="IEs in motorMaster.ieRating">
+			<h2>{{IEs.IE}} - {{IEs.desc}}</h2>
+			<div ng-repeat="kWs in motorMaster.rating">
+				<h3>{{kWs.kW}}</h3>
+				<div ng-repeat="pol in motorMaster.pole">
+					<h4>{{pol.poles}}</h4>
+					<p>{{motorDetails["IE1"]["0.12"]["2_pole"]}}</p>
+				</div>
+			</div>
+		</div>
 		
 	</div>
 	<script src="scripts/libs/angular.js"></script>
