@@ -28,12 +28,6 @@ var app = angular.module('app', ["kendo.directives"])
 	var promise = appService.getData();
 	promise.then(function (data) {
 		$scope.motorDetails = data.data;
-
-		$scope.calcData = {};
-
-		$scope.calcData.eff1 = $scope.motorDetails[$scope.calcData.ieRatings1][$scope.calcData.kwrating1][$scope.calcData.poleSel1];
-
-
 	});
 
 	$scope.kwArray = motorMaster.rating;
