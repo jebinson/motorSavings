@@ -1,47 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<title>Motor Cost Savings Calculator</title>
 
-	<title></title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/kendoStyles/kendo.common-material.min.css" />
 	<link rel="stylesheet" href="css/kendoStyles/kendo.material.min.css" />
 	<link rel="stylesheet" href="css/kendoStyles/kendo.material.mobile.min.css" />
 
+	<script src="scripts/libs/jquery.min.js"></script>
+	<script src="scripts/libs/angular.js"></script>
+	<script src="scripts/libs/angular-route.min.js"></script>	
+	<script src="scripts/libs/kendoJs/kendo.all.min.js"></script>
+	<script src="scripts/app.js"></script>
+	
 </head>
 <body ng-app="app" ng-controller="appCtrl">
 
 	<div class="container">
 		<div>
 			<h2>Motor Cost Savings Calculator</h2>
-			<p>If you are considering a motor upgrade, this simple calculator can help you determine your potential cost savings. Motors are one of the few devices whose first year operating costs can be higher than their initial purchase price. This maximizes the importance of motor operating efficiency—even a slight improvement can pay for itself by returning dollars to the bottom line—quickly and in the years to follow.</p>
+			<p>If you are considering a motor upgrade, this simple calculator can help you
+				determine your potential cost savings. Motors are one of the few devices whose
+				first year operating costs can be higher than their initial purchase price.
+				This maximizes the importance of motor operating efficiency even a slight improvement
+				can pay for itself by returning dollars to the bottom line quickly and in the years to
+				follow.</p>
 
-			<p>You can calculate operating cost, or run a quick comparison between two motors.</p>
+				<p>You can calculate operating cost, or run a quick comparison between two motors.</p>
 
-			<p>To begin enter your motor information in the Detailed Cost Comparison Calculator fields and click the Calculate button.</p>
+				<p>To begin, enter your motor information in the Detailed Cost Comparison Calculator
+					fields and click the Calculate button. The Annual Cost Savings will displayed.</p>
 
-			<p>The Annual Cost Savings will displayed.</p>
-		</div>
-	<div id="example">
-    <div class="demo-section k-content">
-        <h4>Select rating /e.g. 5.5/</h4>
-        <input kendo-auto-complete ng-model="kwrating" k-data-source="kwArray" style="width: 100%;" />
-        <p class="demo-hint">Your selection: {{ kwrating }}</p>
-    </div>
+				</div>
+				<div class="row">
+					<form id="motor1" class="col-md-6 col-sm-6 col-xs-12 well">
+						<h2>Motor 1</h2>
+						<div class="row">
+							<div class="col-md-4 col-sm-4 col-xs-12">
+								<label>IE Class:</label>
+								<input kendo-drop-down-list ng-model="calcData.ieRatings1" k-data-source="ieRatings" style="width: 100%;" />
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-12">
+								<label>Rating:</label>
+								<input kendo-drop-down-list ng-model="calcData.kwrating1" k-data-source="kwArray" style="width: 100%;" />
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-12">
+								<label>Poles:</label>
+								<input kendo-drop-down-list ng-model="calcData.poleSel1" k-data-source="poles" style="width: 100%;" />
+							</div>
+						</div>
+						<h5>Efficiency : {{calcData.eff1}}</h5>
+					</form>
+					<form id="motor2" class="col-md-6 col-sm-6 col-xs-12 well">
+						<h2>Motor 2</h2>
+						<div class="row">
+							<div class="col-md-4 col-sm-4 col-xs-12">
+								<label>IE Class:</label>
+								<input kendo-drop-down-list ng-model="calcData.ieRatings2" k-data-source="ieRatings" style="width: 100%;" />
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-12">
+								<label>Rating:</label>
+								<input kendo-drop-down-list ng-model="calcData.kwrating2" k-data-source="kwArray" style="width: 100%;" />
+							</div>
+							<div class="col-md-4 col-sm-4 col-xs-12">
+								<label>Poles:</label>
+								<input kendo-drop-down-list ng-model="calcData.poleSel2" k-data-source="poles" style="width: 100%;" />
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
 
-    <div class="demo-section k-content">
-        <h4>Select number of poles /e.g. 2 pole/</h4>
-        <input kendo-auto-complete ng-model="poleSel" k-data-source="poles" style="width: 100%;" />
-        <p class="demo-hint">Your selection: {{ poleSel }}</p>
-    </div>
-
-	</div>
-	</div>
-	<script src="scripts/libs/jquery.min.js"></script>
-	<script src="scripts/libs/angular.js"></script>
-	<script src="scripts/libs/angular-route.min.js"></script>	
-	<script src="scripts/libs/kendoJs/kendo.all.min.js"></script>
-	<script src="scripts/app.js"></script>
-
-</body>
-</html>
+		</body>
+		</html>
