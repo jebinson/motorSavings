@@ -9,32 +9,40 @@ var app = angular.module('app', ["kendo.directives"])
 	ieRating:["","IE1","IE2","IE3","IE4"]
 })
 
-.service('appService', ['$http', '$q', function($http, $q)
-{
-	var deffered = $q.defer();
+.controller('appCtrl', 
+	['$scope','motorMaster', '$http', '$q', function($scope, motorMaster, $http, $q){
 
-	$http.get('https://raw.githubusercontent.com/jebinson/motorSavings/master/scripts/motordetails.json').then(function (data) {
-		deffered.resolve(data);
-	});
+		$scope.kwArray = motorMaster.rating;
+		$scope.poles = motorMaster.pole;
+		$scope.ieRatings = motorMaster.ieRating;
 
-	this.getData = function () {
-		return deffered.promise;
-	}
-}])
+		$scope.calcData = {ieRatings1:"", kwrating1:"", poleSel1:"",
+		ieRatings2:"", kwrating2:"", poleSel2:"", eff1:"", eff2:""};
 
+		function getEffData(ie, kw, po) {
+			var deffered = $q.defer(); //$q for AJAX call
 
-.controller('appCtrl', ['$scope', 'appService', 'motorMaster',
-	function($scope, appService, motorMaster){
-	var promise = appService.getData();
-	promise.then(function (data) {
-		$scope.motorDetails = data.data;
-	});
+			var url = 'https://raw.githubusercontent.com/jebinson/motorSavings/master/scripts/motordetails.json';
+			$http.get(url).then(
+				function (response) {
+					motordetails = response.data;
+					effData = motordetails[ie][kw][po];
+					deffered.resolve(effData); //$q for AJAX call
+				})
+			return deffered.promise; //$q for AJAX call
+		}
 
-	$scope.kwArray = motorMaster.rating;
-	$scope.poles = motorMaster.pole;
-	$scope.ieRatings = motorMaster.ieRating;
-
-	
-
-}])
+		$scope.getEff = getEff;
+		function getEff(ie1, kw1, po1, ie2, kw2, po2) {
+			$scope.calcData.eff1 = "Fetching..."
+			$scope.calcData.eff2 = "Fetching..."
+			getEffData(ie1, kw1, po1).then(function (response) {
+				$scope.calcData.eff1 = response;
+			})			
+			getEffData(ie2, kw2, po2).then(function (response) {
+				$scope.calcData.eff2 = response;
+			})
+			
+		}
+	}])
 

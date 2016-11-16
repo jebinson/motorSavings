@@ -50,7 +50,9 @@
 								<input kendo-drop-down-list ng-model="calcData.poleSel1" k-data-source="poles" style="width: 100%;" />
 							</div>
 						</div>
-						<h5>Efficiency : {{motorDetails[calcData.ieRatings1][calcData.kwrating1][calcData.poleSel1] * 25}}</h5>
+						<h4>{{calcData.eff1}} - </h4>
+						<input type="button" ng-click="getEff(calcData.ieRatings1, calcData.kwrating1, calcData.poleSel1)" value="Click">
+
 					</form>
 					<form id="motor2" class="col-md-6 col-sm-6 col-xs-12 well">
 						<h2>Motor 2</h2>
@@ -68,7 +70,6 @@
 								<input kendo-drop-down-list ng-model="calcData.poleSel2" k-data-source="poles" style="width: 100%;" />
 							</div>						
 						</div>
-						<h5>Efficiency : {{motorDetails[calcData.ieRatings2][calcData.kwrating2][calcData.poleSel2]}}</h5>
 					</form>
 				</div>
 			</div>
