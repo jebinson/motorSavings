@@ -2,77 +2,124 @@
 <html>
 <head>
 	<title>Motor Cost Savings Calculator</title>
-
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/kendoStyles/kendo.common-material.min.css" />
-	<link rel="stylesheet" href="css/kendoStyles/kendo.material.min.css" />
-	<link rel="stylesheet" href="css/kendoStyles/kendo.material.mobile.min.css" />
-
-	<script src="scripts/libs/jquery.min.js"></script>
-	<script src="scripts/libs/angular.js"></script>
-	<script src="scripts/libs/angular-route.min.js"></script>	
-	<script src="scripts/libs/kendoJs/kendo.all.min.js"></script>
-	<script src="scripts/app.js"></script>
-	
+	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="css/kendoStyles/kendo.common-material.min.css" rel="stylesheet">
+	<link href="css/kendoStyles/kendo.material.min.css" rel="stylesheet">
+	<link href="css/kendoStyles/kendo.material.mobile.min.css" rel="stylesheet">
+	<link href="css/motorSavings.css" rel="stylesheet" type="text/css">
+	<script src="scripts/libs/jquery.min.js">
+	</script>
+	<script src="scripts/libs/angular.js">
+	</script>
+	<script src="scripts/libs/angular-route.min.js">
+	</script>
+	<script src="scripts/libs/kendoJs/kendo.all.min.js">
+	</script>
+	<script src="scripts/app.js">
+	</script>
 </head>
 <body ng-app="app" ng-controller="appCtrl">
-
-	<div class="container">
-		<div>
-			<h2>Motor Cost Savings Calculator</h2>
-			<p>If you are considering a motor upgrade, this simple calculator can help you
-				determine your potential cost savings. Motors are one of the few devices whose
-				first year operating costs can be higher than their initial purchase price.
-				This maximizes the importance of motor operating efficiency even a slight improvement
-				can pay for itself by returning dollars to the bottom line quickly and in the years to
-				follow.</p>
-
+	<nav class="nav navbar"></nav>
+	<div class="container well">
+		<div class="row">
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<h3>Motor Cost Savings Calculator</h3>
+				<p>If you are considering a motor upgrade, this simple calculator can help you determine your potential cost savings. Motors are one of the few devices whose first year operating costs can be higher than their initial purchase price. This maximizes the importance of motor operating efficiency even a slight improvement can pay for itself by returning dollars to the bottom line quickly and in the years to follow.</p>
 				<p>You can calculate operating cost, or run a quick comparison between two motors.</p>
-
-				<p>To begin, enter your motor information in the Detailed Cost Comparison Calculator
-					fields and click the Calculate button. The Annual Cost Savings will displayed.</p>
-
-				</div>
-				<div class="row">
-					<form id="motor1" class="col-md-6 col-sm-6 col-xs-12 well">
-						<h2>Motor 1</h2>
-						<div class="row">
-							<div class="col-md-4 col-sm-4 col-xs-12">
-								<label>IE Class:</label>
-								<input kendo-drop-down-list ng-model="calcData.ieRatings1" k-data-source="ieRatings" style="width: 100%;" />
-							</div>
-							<div class="col-md-4 col-sm-4 col-xs-12">
-								<label>Rating:</label>
-								<input kendo-drop-down-list ng-model="calcData.kwrating1" k-data-source="kwArray" style="width: 100%;" />
-							</div>
-							<div class="col-md-4 col-sm-4 col-xs-12">
-								<label>Poles:</label>
-								<input kendo-drop-down-list ng-model="calcData.poleSel1" k-data-source="poles" style="width: 100%;" />
-							</div>
-						</div>
-						<h4>{{calcData.eff1}} - </h4>
-						<input type="button" ng-click="getEff(calcData.ieRatings1, calcData.kwrating1, calcData.poleSel1)" value="Click">
-
-					</form>
-					<form id="motor2" class="col-md-6 col-sm-6 col-xs-12 well">
-						<h2>Motor 2</h2>
-						<div class="row">
-							<div class="col-md-4 col-sm-4 col-xs-12">
-								<label>IE Class:</label>
-								<input kendo-drop-down-list ng-model="calcData.ieRatings2" k-data-source="ieRatings" style="width: 100%;" />
-							</div>
-							<div class="col-md-4 col-sm-4 col-xs-12">
-								<label>Rating:</label>
-								<input kendo-drop-down-list ng-model="calcData.kwrating2" k-data-source="kwArray" style="width: 100%;" />
-							</div>
-							<div class="col-md-4 col-sm-4 col-xs-12">
-								<label>Poles:</label>
-								<input kendo-drop-down-list ng-model="calcData.poleSel2" k-data-source="poles" style="width: 100%;" />
-							</div>						
-						</div>
-					</form>
-				</div>
+				<p>To begin, enter your motor information in the Detailed Cost Comparison Calculator fields and click the Calculate button. The Annual Cost Savings will displayed.</p>
 			</div>
+			<div  class="col-md-6 col-sm-6 col-xs-12">
+				<img src="img/motors.jpg" class="img-responsive img-thumbnail motorform" height="250">
+			</div>
+		</div>
+		<div class="row">
+			<form class="col-md-6 col-sm-6 col-xs-12" id="motor1" name="motor1">
+				<h3>Motor 1</h3>
+				<div class="row motorform">
+					<div class="col-md-4 col-sm-4 col-xs-12">
+						<label>IE Class:</label> <input k-data-source="ieRatings" kendo-drop-down-list ng-model="calcData.ieRatings1" style="width: 100%;">
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-12">
+						<label>Rating:</label> <input k-data-source="kwArray" kendo-drop-down-list ng-model="calcData.kwrating1" style="width: 100%;">
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-12">
+						<label>Poles:</label> <input k-data-source="poles" kendo-drop-down-list ng-model="calcData.poleSel1" style="width: 100%;">
+					</div>
+				</div>
+			</form>
+			<form class="col-md-6 col-sm-6 col-xs-12" id="motor2" name="motor2">
+				<h3>Motor 2</h3>
+				<div class="row motorform">
+					<div class="col-md-4 col-sm-4 col-xs-12">
+						<label>IE Class:</label> <input k-data-source="ieRatings" kendo-drop-down-list ng-model="calcData.ieRatings2" style="width: 100%;">
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-12">
+						<label>Rating:</label> <input k-data-source="kwArray" kendo-drop-down-list ng-model="calcData.kwrating2" style="width: 100%;">
+					</div>
+					<div class="col-md-4 col-sm-4 col-xs-12">
+						<label>Poles:</label> <input k-data-source="poles" kendo-drop-down-list ng-model="calcData.poleSel2" style="width: 100%;">
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="median motorform">
+			<label>Elec. Cost ($/kWh)</label> <input name="elecCost" kendo-numeric-text-box ng-model="calcData.elecCost" type="number" />
+			<button class="btn btn-default pull-right" ng-click="calcSavings()" type="submit">Calculate</button>
+		</div>
+		<div ng-show = "calcData.display">
+			<h3>Annual Cost Savings (based on daily usage)</h3>
+			<table class="table">
+				<tr>
+					<th>Motor Details</th>
+					<th>days/week</th>
+					<th>2 hrs/day</th>
+					<th>4 hrs/day</th>
+					<th>8 hrs/day</th>
+					<th>12 hrs/day</th>
+					<th>24 hrs/day</th>
+				</tr>
+				<tr>
+					<td>{{calcData.kwrating1}}kW @ {{calcData.eff1}}% eff <strong>vs</strong> {{calcData.kwrating2}}kW @ {{calcData.eff2}}% eff</td>
+					<td>5</td>
+					<td>{{tableData.annualSaving * 2 * 5}}</td>
+					<td>{{tableData.annualSaving * 4 * 5}}</td>
+					<td>{{tableData.annualSaving * 8 * 5}}</td>
+					<td>{{tableData.annualSaving * 12 * 5}}</td>
+					<td>{{tableData.annualSaving * 24 * 5}}</td>
+				</tr>
+				<tr>
+					<td>{{calcData.kwrating1}}kW @ {{calcData.eff1}}% eff <strong>vs</strong> {{calcData.kwrating2}}kW @ {{calcData.eff2}}% eff</td>
+					<td>7</td>
+					<td>{{tableData.annualSaving * 2 * 7}}</td>
+					<td>{{tableData.annualSaving * 4 * 7}}</td>
+					<td>{{tableData.annualSaving * 8 * 7}}</td>
+					<td>{{tableData.annualSaving * 12 * 7}}</td>
+					<td>{{tableData.annualSaving * 24 * 7}}</td>
+				</tr>
+			</table>
+			<div class="median">
+				<button ng-click="tableData.display = true" class="btn btn-default pull-right">Refer Efficiency table</button>
+			</div>			
+		</div>
+		<div ng-show="tableData.display">
 
-		</body>
-		</html>
+			<table class="table table-bordered table-hover">
+				<tr>
+					<th rowspan="2">Output kW</th>
+					<th colspan="4" ng-repeat="ie in ieRatings">{{ie}}</th>
+				</tr>
+				<tr>
+					<th ng-repeat="pole in poles">{{pole}}</th>
+					<th ng-repeat="pole in poles">{{pole}}</th>
+					<th ng-repeat="pole in poles">{{pole}}</th>
+					<th ng-repeat="pole in poles">{{pole}}</th>
+				</tr>
+				<tr ng-repeat="kw in kwArray track by $index">
+					<td>{{kw}}</td>
+					<td ng-repeat="ef in effArray[$index] track by $index">{{ef}}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
