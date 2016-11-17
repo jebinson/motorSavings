@@ -1,6 +1,6 @@
 body{
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
-	background-color: #e3e5ce;
+	background-color: #2b1201;
 }
 
 #motor1,#motor2{
@@ -8,7 +8,7 @@ body{
 }
 
 .motorform{
-	border-top: 2px solid #c6ca9b;
+	border-top: 2px solid #7c3100;
 }
 
 .btn{
@@ -17,4 +17,14 @@ body{
 
 .median{
 	padding: 10px;
+}
+
+tr{
+    border-top:2px solid #7c3100;
+    text-align: center;    
+}
+
+th{
+	vertical-align: center;
+	text-align: center;
 }
