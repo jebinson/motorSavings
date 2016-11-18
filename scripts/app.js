@@ -64,10 +64,12 @@ var app = angular.module('app', ["kendo.directives"])
 					$scope.calcData.eff2 = response[ie2][kw2][pol2];
 					//kw1 is a string, kWH = kW / (%eff / 100);
 					$scope.calcData.kwH1 = (parseFloat(kw1) * 100) / $scope.calcData.eff1;
+					console.log($scope.calcData.kwH1);
 					$scope.calcData.kwH2 = (parseFloat(kw2) * 100) / $scope.calcData.eff2;
+					console.log($scope.calcData.kwH2);
 					//difference between kWH of motor 1 and motor 2, times electrical cost.
 					$scope.tableData.savingPerhour = Math.abs($scope.calcData.kwH1 - $scope.calcData.kwH2) * $scope.calcData.elecCost;
-					$scope.tableData.annualSaving = Math.round($scope.tableData.savingPerhour * 52); //savings per year.
+					$scope.tableData.annualSaving = $scope.tableData.savingPerhour * 52; //savings per year.
 					//calculation table ng-show control.
 					$scope.calcData.display = true;
 

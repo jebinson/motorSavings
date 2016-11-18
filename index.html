@@ -90,7 +90,7 @@
 				<tr ng-repeat="days in [5, 7]">
 					<td>{{calcData.kwrating1}}kW @ {{calcData.eff1}}% eff <strong>vs</strong> {{calcData.kwrating2}}kW @ {{calcData.eff2}}% eff</td>
 					<td>{{days}}</td>
-					<td ng-repeat="hrs in [2, 4, 8, 12, 24]">{{tableData.annualSaving * hrs * days}}</td>
+					<td ng-repeat="hrs in [2, 4, 8, 12, 24]">{{tableData.annualSaving * hrs * days | number:0}}</td>
 				</tr>
 			</table>
 			<div class="median">
