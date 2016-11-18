@@ -28,3 +28,7 @@ th{
 	vertical-align: center;
 	text-align: center;
 }
+
+input{
+	background-color: #fafafa !important;
+}

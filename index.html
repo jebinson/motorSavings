@@ -1,26 +1,33 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
 	<title>Motor Cost Savings Calculator</title>
+
+	<!--third party styles-->
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 	<link href="css/kendoStyles/kendo.common-material.min.css" rel="stylesheet">
 	<link href="css/kendoStyles/kendo.material.min.css" rel="stylesheet">
 	<link href="css/kendoStyles/kendo.material.mobile.min.css" rel="stylesheet">
+	<!--custom style-->
 	<link href="css/motorSavings.css" rel="stylesheet" type="text/css">
-	<script src="scripts/libs/jquery.min.js">
-	</script>
-	<script src="scripts/libs/angular.js">
-	</script>
-	<script src="scripts/libs/angular-route.min.js">
-	</script>
-	<script src="scripts/libs/kendoJs/kendo.all.min.js">
-	</script>
-	<script src="scripts/app.js">
-	</script>
+
+	<!--third party JS-->
+	<script src="scripts/libs/jquery.min.js"></script>
+	<script src="scripts/libs/angular.js"></script>
+	<script src="scripts/libs/kendoJs/kendo.all.min.js"></script>
+
+	<!--AngularJS webapp file-->
+	<script src="scripts/app.js"></script>
+
 </head>
+
 <body ng-app="app" ng-controller="appCtrl">
 	<nav class="nav navbar"></nav>
 	<div class="container well">
+
+		<!--application description and image-->
 		<div class="row">
 			<div class="col-md-6 col-sm-6 col-xs-12">
 				<h3>Motor Cost Savings Calculator</h3>
@@ -32,6 +39,9 @@
 				<img src="img/motors.jpg" class="img-responsive img-thumbnail motorform" height="250">
 			</div>
 		</div>
+
+		<!--input form, should try to implement it with ng-repeat
+		kendoUI dropdown list implemented, k-data-source points to arrays.-->
 		<div class="row">
 			<form class="col-md-6 col-sm-6 col-xs-12" id="motor1" name="motor1">
 				<h3>Motor 1</h3>
@@ -62,45 +72,33 @@
 				</div>
 			</form>
 		</div>
+
 		<div class="median motorform">
 			<label>Elec. Cost ($/kWh)</label> <input name="elecCost" kendo-numeric-text-box ng-model="calcData.elecCost" type="number" />
 			<button class="btn btn-default pull-right" ng-click="calcSavings()" type="submit">Calculate</button>
 		</div>
+
+		<!--Annual cost savings -->
 		<div ng-show = "calcData.display">
 			<h4>Annual Cost Savings (based on daily usage)</h4>
 			<table class="table">
 				<tr>
 					<th>Motor Details</th>
 					<th>days/week</th>
-					<th>2 hrs/day</th>
-					<th>4 hrs/day</th>
-					<th>8 hrs/day</th>
-					<th>12 hrs/day</th>
-					<th>24 hrs/day</th>
+					<th ng-repeat="hrs in [2, 4, 8, 12, 24]">{{hrs}} hrs/day</th>
 				</tr>
-				<tr>
+				<tr ng-repeat="days in [5, 7]">
 					<td>{{calcData.kwrating1}}kW @ {{calcData.eff1}}% eff <strong>vs</strong> {{calcData.kwrating2}}kW @ {{calcData.eff2}}% eff</td>
-					<td>5</td>
-					<td>{{tableData.annualSaving * 2 * 5}}</td>
-					<td>{{tableData.annualSaving * 4 * 5}}</td>
-					<td>{{tableData.annualSaving * 8 * 5}}</td>
-					<td>{{tableData.annualSaving * 12 * 5}}</td>
-					<td>{{tableData.annualSaving * 24 * 5}}</td>
-				</tr>
-				<tr>
-					<td>{{calcData.kwrating1}}kW @ {{calcData.eff1}}% eff <strong>vs</strong> {{calcData.kwrating2}}kW @ {{calcData.eff2}}% eff</td>
-					<td>7</td>
-					<td>{{tableData.annualSaving * 2 * 7}}</td>
-					<td>{{tableData.annualSaving * 4 * 7}}</td>
-					<td>{{tableData.annualSaving * 8 * 7}}</td>
-					<td>{{tableData.annualSaving * 12 * 7}}</td>
-					<td>{{tableData.annualSaving * 24 * 7}}</td>
+					<td>{{days}}</td>
+					<td ng-repeat="hrs in [2, 4, 8, 12, 24]">{{tableData.annualSaving * hrs * days}}</td>
 				</tr>
 			</table>
 			<div class="median">
 				<button ng-click="tableData.display = true" class="btn btn-default pull-right">Refer Efficiency table</button>
 			</div>			
 		</div>
+
+		<!--Efficiency table loaded from JSON-->
 		<div ng-show="tableData.display">
 			<h4>Minimum 50 Hz efficiency values defined in IEC/EN 60034-30-1:2014</h4>
 			<table class="table table-striped table-hover">

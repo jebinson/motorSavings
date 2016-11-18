@@ -29,9 +29,11 @@ var app = angular.module('app', ["kendo.directives"])
 
 }])
 
+//main controller
 .controller('appCtrl', 
 	['$scope','motorMaster', 'appService', function($scope, motorMaster, appService){
 
+		//constant made availabe to view for binding.
 		$scope.kwArray = motorMaster.rating;
 		$scope.poles = motorMaster.pole;
 		$scope.ieRatings = motorMaster.ieRating;
@@ -40,34 +42,44 @@ var app = angular.module('app', ["kendo.directives"])
 		$scope.calcData = {ieRatings1:"", kwrating1:"", poleSel1:"",ieRatings2:"", kwrating2:"",
 		poleSel2:"", eff1:"", eff2:"", elecCost:0.21, display:false};
 
+		//efficiency table ng-show control.
 		$scope.tableData = {display:false};
 
+		//calculates annual savings for motors, considering it operational for one hour per day.
 		$scope.calcSavings = calcSavings;
 		function calcSavings() {
+
 			var ie1 = $scope.calcData.ieRatings1;
 			var kw1 = $scope.calcData.kwrating1;
 			var pol1 = $scope.calcData.poleSel1;
 			var ie2 = $scope.calcData.ieRatings2;
 			var kw2 = $scope.calcData.kwrating2;
 			var pol2 = $scope.calcData.poleSel2;
-			if (ie1 && kw1 && pol1 && ie2 && kw2 && pol2) {
-				appService.getEffData().then(function (response) {
 
+			if (ie1 && kw1 && pol1 && ie2 && kw2 && pol2) {
+
+				appService.getEffData().then(function (response) {
+					//pulls efficiency data from JSON.
 					$scope.calcData.eff1 = response[ie1][kw1][pol1];
 					$scope.calcData.eff2 = response[ie2][kw2][pol2];
+					//kw1 is a string, kWH = kW / (%eff / 100);
 					$scope.calcData.kwH1 = (parseFloat(kw1) * 100) / $scope.calcData.eff1;
 					$scope.calcData.kwH2 = (parseFloat(kw2) * 100) / $scope.calcData.eff2;
-
+					//difference between kWH of motor 1 and motor 2, times electrical cost.
 					$scope.tableData.savingPerhour = Math.abs($scope.calcData.kwH1 - $scope.calcData.kwH2) * $scope.calcData.elecCost;
-					$scope.tableData.annualSaving = Math.round($scope.tableData.savingPerhour * 52);
+					$scope.tableData.annualSaving = Math.round($scope.tableData.savingPerhour * 52); //savings per year.
+					//calculation table ng-show control.
 					$scope.calcData.display = true;
+
 				});
+
 			} else {
-				alert('Fill in motor deatils.')
+				alert('Fill in motor deatils.') //alerts when all the motor fields are not filled.
 			}
 			
 		}
 
+		//convert objects in JSON to array to do ng-repeat.
 		appService.getEffData().then(function (response) {
 			var tempEffData = [];
 			for (i in $scope.kwArray) {
